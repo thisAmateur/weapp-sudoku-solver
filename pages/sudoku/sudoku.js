@@ -61,7 +61,7 @@ var config = {
   },
 
   inputNum : function(e) {
-    if (!this.data.readyToInput) {
+    if (this.data.solveDone || !this.data.readyToInput) {
       return;
     }
     var numToBeInput = e.target.dataset.num;

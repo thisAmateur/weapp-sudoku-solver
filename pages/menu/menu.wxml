@@ -1,18 +1,21 @@
 <!--index.wxml-->
-<view class="container">
+<view class="top-container">
   <view class="title">
     使用说明
   </view>
   <view class='body'>
-    1.数字0表示未知数。
+    1.空格子表示未知数。
   </view>
   <view class='body'>
     2.点击某个宫格之后，宫格背景色变为浅蓝色，此时为输入状态；再点击下方的任意数字，将数字输入到宫格中。
   </view>
   <view class='body'>
-    3.待所有已知数字输入完毕之后，点击"求解"按钮来解题。
+    3.数字输入区的数字0表示删除当前宫格的已填数字。
   </view>
   <view class='body'>
-    4.点击"清零"按钮可以重新开始。
+    4.待所有已知数字输入完毕之后，点击"求解"按钮来解题。
+  </view>
+  <view class='body'>
+    5.点击"清零"按钮可以重新开始。
   </view>
 </view>

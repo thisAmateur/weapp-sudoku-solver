@@ -1,14 +1,14 @@
 <view class="top-container" bindtap='emptyAreaClick'>
 
   <view class='head'>
-    <button class='btn' hover-class='btn-hover'>占位符</button>
+    <!--button class='btn' hover-class='btn-hover'>占位符</button-->
     <button class='btn'hover-class='btn-hover' catchtap='goToMenu'>使用说明</button>
   </view>
 
   <view class='grid-container'>
     <view class="row-{{i}}" wx:for="{{[0, 1, 2, 3, 4, 5, 6, 7, 8]}}" wx:for-item="i">
       <view class="col-{{j}}" wx:for="{{[0, 1, 2, 3, 4, 5, 6, 7, 8]}}" wx:for-item="j">
-          <view id='cell_{{i}}_{{j}}' class='grid-cell' style="background: {{readyToInput && i==choosingCell[0] && j==choosingCell[1] ? '#acd6ff' : (initMap[i][j]==0 ? 'white' : '#e5e5e5')}}" catchtap='cellClick'>{{initMap[i][j]}}</view>
+          <view id='cell_{{i}}_{{j}}' class='grid-cell' style="background: {{readyToInput && i==choosingCell[0] && j==choosingCell[1] ? '#acd6ff' : (initMap[i][j]==0 ? 'white' : '#e5e5e5')}}" catchtap='cellClick'>{{initMap[i][j]>0 ? initMap[i][j] : ''}}</view>
       </view>
     </view>
   </view>
