@@ -4,6 +4,8 @@
 
 计算 9 * 9 宫格数独的工具类微信小程序
 
+使用的算法移植自本人另一个工程[sudoku-solver(Java)](https://github.com/thisAmateur/sudoku-solver)
+
 ## 预览图
 #### 启动页面
 ![initial page](https://github.com/thisAmateur/weapp-sudoku-solver/raw/master/readme_img/initial.png)
