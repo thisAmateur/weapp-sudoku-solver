@@ -16,7 +16,6 @@
   background: linear-gradient(#76d05e 50%, #f5f5f5 50%);
 }
 .grid-container {
-  margin-top: 50rpx;
   cursor: default;
   -webkit-touch-callout: none;
   -ms-touch-callout: none;
@@ -28,8 +27,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 650rpx;
-  height: 650rpx;
+  /*width: 650rpx;
+  height: 650rpx;*/
   border: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -37,39 +36,47 @@
 }
 
 .row-0, .row-1, .row-2, .row-3, .row-4, .row-5, .row-6, .row-7, .row-8 {
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  box-sizing: content-box;
 }
 
 .col-0, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8 {
   display: inline-block;
-  width: 72.222rpx;
-  height: 72.222rpx;
-  box-sizing: border-box;
+  /*width: 72rpx;
+  height: 72rpx;*/
+  box-sizing: content-box;
 }
 .grid-cell {
   background: #e5e5e5;
-  width: 72.222rpx;
-  height: 72.222rpx;
-  line-height: 72.222rpx;
+  /* 长宽超过此值，在ide中的ipad机型上以及真机的荣耀8手机上，会出现整体高度不足的问题，某些cell就会被压缩导致框线丢失和方框变扁 */
+  width: 68rpx;
+  height: 68rpx;
+  line-height: 66rpx;
   text-align: center;
-  border: 0.5rpx solid #bbbbbb;
+  border: 0.5rpx solid #e5e5e5;
   box-sizing: border-box;
 }
 
 .row-2, .row-5 {
-  border-bottom: 0.5rpx solid #bbbbbb;
-}
-.row-3, .row-6 {
-  border-top: 0.5rpx solid #bbbbbb;
+  border-bottom: 4rpx solid #bbbbbb;
 }
 .col-2, .col-5 {
-  border-right: 1rpx solid #bbbbbb;
+  border-right: 4rpx solid #bbbbbb;
 }
-.col-3, .col-6 {
-  border-left: 1rpx solid #bbbbbb;
+
+.row-2 .grid-cell, .row-5 .grid-cell {
+  border-bottom: 0;
+}
+.row-3 .grid-cell, .row-6 .grid-cell {
+  border-top: 0;
+}
+.col-2 .grid-cell, .col-5 .grid-cell {
+  border-right: 0;
+}
+.col-3 .grid-cell, .col-6 .grid-cell {
+  border-left: 0;
 }
 
 .row-0 .grid-cell {
@@ -120,14 +127,15 @@
 
 .head {
   display: flex;
-  justify-content: flex-end;
-  padding-top: 50rpx;
+  justify-content: space-between;
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
 }
 
 .input-row {
   display: flex;
   justify-content: space-around;
-  margin-top: 50rpx;
+  margin-top: 25rpx;
 }
 
 .input-num {
@@ -137,10 +145,13 @@
   line-height: 50rpx;
   text-align: center;
 }
+.input-num.red {
+  color: red;
+}
 
 .bottom {
   display: flex;
   justify-content: space-around;
-  padding-top: 50rpx;
-  margin-bottom: 50rpx;
+  padding-top: 25rpx;
+  margin-bottom: 25rpx;
 }

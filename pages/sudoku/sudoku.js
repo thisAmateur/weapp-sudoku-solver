@@ -34,7 +34,8 @@ var config = {
     ],*/
     choosingCell : [null, null],
     readyToInput : false,
-    solveDone : false
+    solveDone : false,
+    timeElapse : '解一下就知道'
   },
 
   onLoad : function() {
@@ -92,11 +93,16 @@ var config = {
     }
     var map = new SudokuMap();
     map.init(this.data.initMap);
+    if (!this.checkInitMapValidation(map)) {
+      this.showErrMsg();
+      return;
+    }
     var solver = new Solver(map);
-    solver.doSolve();
+    var usedTime = solver.doSolve();
     this.setData({
       initMap : solver.map.getResult(),
-      solveDone : true
+      solveDone : true,
+      timeElapse : usedTime+'ms'
     });
   },
 
@@ -124,8 +130,70 @@ var config = {
       ],
       choosingCell: [null, null],
       readyToInput: false,
-      solveDone: false
+      solveDone: false,
+      timeElapse: '解一下就知道'
     });
+  },
+
+  checkInitMapValidation : function(map) {
+    // 校验每一行
+    for (var i=0; i<9; i++) {
+      var flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var rowNodes = map.getRow(i);
+      for(var ii=0; ii<9; ii++) {
+        if (rowNodes[ii].value == 0) {
+          continue;
+        }
+        if (flag[rowNodes[ii].value] > 0) {
+          return false;
+        }
+        flag[rowNodes[ii].value] = 1;
+      }
+    }
+    // 校验每一列
+    for (var i = 0; i < 9; i++) {
+      var flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var colNodes = map.getCol(i);
+      for (var ii = 0; ii < 9; ii++) {
+        if (colNodes[ii].value == 0) {
+          continue;
+        }
+        if (flag[colNodes[ii].value] > 0) {
+          return false;
+        }
+        flag[colNodes[ii].value] = 1;
+      }
+    }
+    // 校验每个九宫格
+    for (var i = 0; i < 9; i++) {
+      var rowStart = parseInt(i/3)*3;
+      var colStart = Math.round(i%3)*3;
+      var tempNodes = new Array();
+      for (var j=0; j<3; j++) {
+        for (var jj=0; jj<3; jj++) {
+          tempNodes[j*3 + jj] = map.getNode(rowStart+j, colStart+jj);
+        }
+      }
+      var flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      for (var ii = 0; ii < 9; ii++) {
+        if (tempNodes[ii].value == 0) {
+          continue;
+        }
+        if (flag[tempNodes[ii].value] > 0) {
+          return false;
+        }
+        flag[tempNodes[ii].value] = 1;
+      }
+    }
+    return true;
+  },
+
+  showErrMsg : function() {
+    wx.showModal({
+      title: '提示',
+      content: '同一行，同一列，同一九宫格，不能有重复的数字',
+      showCancel: false
+    })
   }
 }
 

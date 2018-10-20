@@ -2,7 +2,10 @@
 
   <view class='head'>
     <!--button class='btn' hover-class='btn-hover'>占位符</button-->
-    <button class='btn'hover-class='btn-hover' catchtap='goToMenu'>使用说明</button>
+    <view>
+      <text>耗时：{{timeElapse}}</text>
+    </view>
+    <button class='btn' hover-class='btn-hover' catchtap='goToMenu'>使用说明</button>
   </view>
 
   <view class='grid-container'>
@@ -18,7 +21,8 @@
       <view class='input-num' wx:for='{{[1,2,3,4,5]}}' wx:for-item='i' catchtap='inputNum' data-num='{{i}}'>{{i}}</view>
     </view>
     <view class='input-row'>
-      <view class='input-num' wx:for='{{[6,7,8,9,0]}}' wx:for-item='i' catchtap='inputNum' data-num='{{i}}'>{{i}}</view>
+      <view class='input-num' wx:for='{{[6,7,8,9]}}' wx:for-item='i' catchtap='inputNum' data-num='{{i}}'>{{i}}</view>
+      <view class='input-num red' catchtap='inputNum' data-num='0'>X</view>
     </view>
   </view>
 

@@ -94,6 +94,7 @@ Solver.prototype = {
     }
     var useTime = new Date().getTime() - start;
     console.log("use time: " + useTime + 'ms');
+    return useTime;
   }
 }
 
