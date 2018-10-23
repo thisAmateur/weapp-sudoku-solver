@@ -35,7 +35,7 @@ var config = {
     choosingCell : [null, null],
     readyToInput : false,
     solveDone : false,
-    timeElapse : '��һ�¾�֪��'
+    timeElapse : '解一下就知道'
   },
 
   onLoad : function() {
@@ -46,12 +46,18 @@ var config = {
 
   },
 
+  /**
+   * 跳转到'使用说明'
+   */
   goToMenu : function() {
     wx.navigateTo({
       url: '../menu/menu'
     })
   },
 
+  /**
+   * 点击某个宫格
+   */
   cellClick : function(e) {
     var cellId = e.target.id.split("_");
     this.setData({
@@ -61,6 +67,9 @@ var config = {
 
   },
 
+  /**
+   * 点击数字输入区的某个数字
+   */
   inputNum : function(e) {
     if (this.data.solveDone || !this.data.readyToInput) {
       return;
@@ -73,6 +82,9 @@ var config = {
     });
   },
 
+  /**
+   * 点击求解
+   */
   doSolve : function() {
     if (this.data.solveDone) {
       return;
@@ -106,6 +118,9 @@ var config = {
     });
   },
 
+  /**
+   * 点击空白区域
+   */
   emptyAreaClick : function() {
     this.setData({
       choosingCell: [null, null],
@@ -113,6 +128,9 @@ var config = {
     });
   },
 
+  /**
+   * 点击清零
+   */
   clean : function() {
     this.setData({
       initMap: [
@@ -131,12 +149,16 @@ var config = {
       choosingCell: [null, null],
       readyToInput: false,
       solveDone: false,
-      timeElapse: '��һ�¾�֪��'
+      timeElapse: '解一下就知道'
     });
   },
 
+  /**
+   * 校验输入的初始数据是否正确
+   * 在doSolve中被调用
+   */
   checkInitMapValidation : function(map) {
-    // У��ÿһ��
+    // 校验每一行
     for (var i=0; i<9; i++) {
       var flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       var rowNodes = map.getRow(i);
@@ -150,7 +172,7 @@ var config = {
         flag[rowNodes[ii].value] = 1;
       }
     }
-    // У��ÿһ��
+    // 校验每一列
     for (var i = 0; i < 9; i++) {
       var flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       var colNodes = map.getCol(i);
@@ -164,7 +186,7 @@ var config = {
         flag[colNodes[ii].value] = 1;
       }
     }
-    // У��ÿ���Ź���
+    // 校验每个九宫格
     for (var i = 0; i < 9; i++) {
       var rowStart = parseInt(i/3)*3;
       var colStart = Math.round(i%3)*3;
@@ -188,10 +210,13 @@ var config = {
     return true;
   },
 
+  /**
+   * 当输入的初始数据有错误
+   */
   showErrMsg : function() {
     wx.showModal({
-      title: '��ʾ',
-      content: 'ͬһ�У�ͬһ�У�ͬһ�Ź��񣬲������ظ�������',
+      title: '提示',
+      content: '同一行，同一列，同一九宫格，不能有重复的数字',
       showCancel: false
     })
   }

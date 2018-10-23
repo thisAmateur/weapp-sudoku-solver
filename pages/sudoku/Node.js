@@ -1,5 +1,11 @@
 var Location = require('./Location.js');
 
+/**
+ * 宫格节点，总共有9*9个宫格
+ * value：实际填的值，范围[0,9]，0表示该点未解
+ * location：该点的坐标，横纵坐标从0~8，左上角的(0,0)是原点，类型为Location
+ * candidates：剩余可能的值
+ */
 function Node(value, row, col, candidates) {
   this.value = value;
   this.location = new Location(row, col);
@@ -14,6 +20,9 @@ function Node(value, row, col, candidates) {
 }
 
 Node.prototype = {
+  /**
+   * 删除候选值
+   */
   killCandidate: function (value) {
     var length = this.candidates.length;
     for (var i = 0; i < length; i++) {
@@ -26,6 +35,9 @@ Node.prototype = {
     return rnt;
   },
 
+  /**
+   * 深拷贝
+   */
   clone: function () {
     var _obj = JSON.stringify(this);
     var rnt = JSON.parse(_obj);
